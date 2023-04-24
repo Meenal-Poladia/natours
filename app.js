@@ -1,16 +1,23 @@
+const fs = require('fs');
+
 const express = require('express');
 
-const app = express();
+const tours = JSON.parse(
+  fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`)
+);
 
+const app = express();
 const port = 3000;
 
-app.get("/", (request, response) => {
-  response.status(200).json({message: "I am on root", app: "Natours"});
-})
-
-app.post("/overview", (request, response) => {
-  response.status(200).send("I am on overview");
-})
+app.get("/api/v1/tours", (request, response) => {
+  response.status(200).json({
+    status: "success",
+    results: tours.length,
+    data: {
+      tours
+    }
+  })
+});
 
 app.listen(port, () => {
   console.log(`Server is started`, port);
