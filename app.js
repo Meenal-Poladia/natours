@@ -56,6 +56,25 @@ app.get("/api/v1/tours/:id", (request, response) => {
   }
 })
 
+app.patch("/api/v1/tours/:id", (request, response) => {
+  const id = request.params.id * 1;
+  const tour = tours.find(tour => tour.id === id);
+  if (!tour) {
+    response.status(404).json({
+      status: "Failed",
+      message: "Invalid ID"
+    })
+  }
+  else {
+    response.status(200).json({
+      status: "Success",
+      data: {
+        tours: "Updated the tour"
+      }
+    })
+  }
+});
+
 app.listen(port, () => {
   console.log(`Server is started`, port);
 })
