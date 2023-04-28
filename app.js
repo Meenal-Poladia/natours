@@ -1,7 +1,8 @@
 const fs = require('fs');
-
 const express = require('express');
+const morgan = require('morgan');
 
+//1. Middlewares
 const tours = JSON.parse(
   fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`)
 );
@@ -9,9 +10,11 @@ const tours = JSON.parse(
 const app = express();
 //A middleware for sending body in the http request
 app.use(express.json());
+app.use(morgan('dev'));
 
 const port = 3000;
 
+//2. Function or Controllers
 const getAllTours = (request, response) => {
   response.status(200).json({
     status: "success",
@@ -92,6 +95,7 @@ const getTour = (request, response) => {
   }
 }
 
+//3. Routes
 app.route("/api/v1/tours")
   .get(getAllTours)
   .post(createTour)
@@ -101,6 +105,7 @@ app.route("/api/v1/tours/:id")
   .patch(updateTour)
   .delete(deleteTour)
 
+// Listening to Server
 app.listen(port, () => {
   console.log(`Server is started`, port);
 })
