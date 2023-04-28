@@ -1,4 +1,3 @@
-const fs = require('fs');
 const express = require('express');
 const morgan = require('morgan');
 const tourRouter = require('./routes/tourRoutes');
@@ -10,12 +9,7 @@ const app = express();
 app.use(express.json());
 app.use(morgan('dev'));
 
-const port = 3000;
-
 app.use("/api/v1/tours", tourRouter);
 app.use('/api/v1/users', userRouter);
 
-// Listening to Server
-app.listen(port, () => {
-  console.log(`Server is started`, port);
-})
+module.exports = app;
