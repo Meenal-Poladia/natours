@@ -95,6 +95,41 @@ const getTour = (request, response) => {
   }
 }
 
+const getAllUsers = (request, response) => {
+  response.status(500).json({
+    status: "Failed",
+    message: "Route yet not defined"
+  })
+};
+
+const createUser = (request, response) => {
+  response.status(500).json({
+    status: "Failed",
+    message: "Route yet not defined"
+  })
+};
+
+const getUser = (request, response) => {
+  response.status(500).json({
+    status: "Failed",
+    message: "Route yet not defined"
+  })
+};
+
+const updateUser = (request, response) => {
+  response.status(500).json({
+    status: "Failed",
+    message: "Route yet not defined"
+  })
+};
+
+const deleteUser = (request, response) => {
+  response.status(500).json({
+    status: "Failed",
+    message: "Route yet not defined"
+  })
+};
+
 //3. Routes
 app.route("/api/v1/tours")
   .get(getAllTours)
@@ -104,6 +139,16 @@ app.route("/api/v1/tours/:id")
   .get(getTour)
   .patch(updateTour)
   .delete(deleteTour)
+
+app.route("/api/v1/users")
+  .get(getAllUsers)
+  .post(createUser)
+
+app.route("/api/v1/users/:id")
+  .get(getUser)
+  .patch(updateUser)
+  .delete(deleteUser)
+
 
 // Listening to Server
 app.listen(port, () => {
