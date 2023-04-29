@@ -64,6 +64,16 @@ exports.deleteTour = (request, response) => {
   }
 }
 
+exports.checkRequestBody = (request, response, next) => {
+  if (!request.body.name || !request.body.price) {
+    return response.status(400).json({
+      status: "Failed",
+      message: "Missing name or price"
+    });
+  }
+  next();
+}
+
 exports.getTour = (request, response) => {
   const id = request.params.id * 1;
   const tour = tours.find(tour => tour.id === id);
